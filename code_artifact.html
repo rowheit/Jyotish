@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="mr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ज्योतिष ज्ञान व रत्न मार्गदर्शक - Cosmic Marathi Astrology</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Tiro+Devanagari+Marathi:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cosmic: {
+                            bg: '#080911',
+                            dark: '#0f1021',
+                            purple: '#2d006b',
+                            violet: '#6b21a8',
+                            gold: '#ffd700',
+                            amber: '#ff9f1c',
+                            cyan: '#06b6d4',
+                            card: 'rgba(23, 25, 48, 0.65)'
+                        }
+                    },
+                    fontFamily: {
+                        marathi: ['"Tiro Devanagari Marathi"', 'serif'],
+                        heading: ['"Rozha One"', 'serif'],
+                        sans: ['Poppins', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 18s linear infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(255, 215, 0, 0.2), inset 0 0 15px rgba(255, 215, 0, 0.1)' },
+                            '100%': { boxShadow: '0 0 30px rgba(255, 215, 0, 0.6), inset 0 0 25px rgba(255, 215, 0, 0.3)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Tiro Devanagari Marathi', serif;
+            background-color: #080911;
+            color: #f1f5f9;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas Particle Background */
+        #starCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(20, 22, 45, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-panel-hover:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 12px 40px 0 rgba(107, 33, 168, 0.3);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF5C0 0%, #FFD700 50%, #FF9F1C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cosmic-gradient-btn {
+            background: linear-gradient(135deg, #4c1d95 0%, #6b21a8 50%, #b45309 100%);
+            background-size: 200% 200%;
+            transition: all 0.4s ease;
+        }
+
+        .cosmic-gradient-btn:hover {
+            background-position: right center;
+            box-shadow: 0 0 25px rgba(255, 159, 28, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Aurora Glow Effect */
+        .aurora-1 {
+            position: fixed;
+            top: -10%;
+            left: 20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(107, 33, 168, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .aurora-2 {
+            position: fixed;
+            bottom: -10%;
+            right: 10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 159, 28, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #080911;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 215, 0, 0.6);
+        }
+    </style>
+</head>
+<body class="custom-scrollbar relative">
+
+    <!-- Star Canvas Background -->
+    <canvas id="starCanvas"></canvas>
+
+    <!-- Aurora Glowing Background Effects -->
+    <div class="aurora-1"></div>
+    <div class="aurora-2"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="relative z-10 flex flex-col min-h-screen">
+
+        <!-- Navigation Header -->
+        <header class="glass-panel sticky top-0 z-40 border-b border-cosmic-gold/20">
+            <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full border border-cosmic-gold/50 flex items-center justify-center bg-cosmic-purple/40 text-cosmic-gold animate-spin-slow">
+                        <i class="fa-solid fa-sun text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold font-marathi gold-gradient-text tracking-wide flex items-center gap-2">
+                            ज्योतिष ज्ञान व रत्न मार्गदर्शक
+                        </h1>
+                        <p class="text-[11px] text-gray-400 font-sans tracking-wider uppercase">Cosmic Astrology & Gemstone AI Intelligence</p>
+                    </div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="flex items-center space-x-3 text-xs font-sans">
+                    <button onclick="toggleLLMModal()" class="px-3.5 py-2 rounded-full glass-panel hover:bg-cosmic-purple/40 text-cosmic-gold border border-cosmic-gold/30 flex items-center gap-2 transition">
+                        <span id="llm-status-ping" class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500" id="llm-status-dot"></span>
+                        </span>
+                        <i class="fa-solid fa-microchip"></i>
+                        <span id="llm-status-text">Local LLM: बंद (Rule Engine Active)</span>
+                    </button>
+                    <button onclick="scrollToCatalogue()" class="px-3.5 py-2 rounded-full glass-panel text-gray-200 hover:text-cosmic-gold border border-gray-700 hover:border-cosmic-gold/40 flex items-center gap-2 transition">
+                        <i class="fa-solid fa-gem text-cosmic-amber"></i>
+                        <span>रत्न दालन (Catalogue)</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace Grid -->
+        <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+
+            <!-- Left Panel: User Input Form -->
+            <section class="lg:col-span-5 glass-panel rounded-3xl p-6 relative overflow-hidden transition-all duration-300">
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-cosmic-purple/30 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex items-center justify-between border-b border-cosmic-gold/20 pb-4 mb-6">
+                    <h2 class="text-xl font-bold text-cosmic-gold font-marathi flex items-center gap-2">
+                        <i class="fa-solid fa-scroll text-cosmic-amber"></i> जन्म माहिती प्रविष्ट करा
+                    </h2>
+                    <span class="text-xs text-gray-400 font-sans"><i class="fa-solid fa-shield-halved text-green-400"></i> १००% सुरक्षित</span>
+                </div>
+
+                <form id="astrologyForm" onsubmit="handleFormSubmission(event)" class="space-y-4 text-sm font-sans">
+                    <!-- User Name -->
+                    <div>
+                        <label class="block text-gray-300 mb-1 font-marathi text-xs">पूर्ण नाव (Full Name):</label>
+                        <div class="relative">
+                            <input type="text" id="userName" required placeholder="उदा. राहुल शर्मा" class="w-full bg-cosmic-bg/80 border border-cosmic-gold/30 rounded-xl px-3.5 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-cosmic-gold transition">
+                            <i class="fa-solid fa-user absolute right-3.5 top-3.5 text-gray-500"></i>
+                        </div>
+                    </div>
+
+                    <!-- Date & Time of Birth -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-300 mb-1 font-marathi text-xs">जन्म तारीख (DOB):</label>
+                            <input type="date" id="userDOB" required class="w-full bg-cosmic-bg/80 border border-cosmic-gold/30 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-cosmic-gold transition">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-1 font-marathi text-xs">जन्म वेळ (Time):</label>
+                            <input type="time" id="userTOB" required class="w-full bg-cosmic-bg/80 border border-cosmic-gold/30 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-cosmic-gold transition">
+                        </div>
+                    </div>
+
+                    <!-- Birth Place & Gender -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-300 mb-1 font-marathi text-xs">जन्म स्थान (Place):</label>
+                            <input type="text" id="userPOB" placeholder="उदा. मुंबई / पुणे" required class="w-full bg-cosmic-bg/80 border border-cosmic-gold/30 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-cosmic-gold transition">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-1 font-marathi text-xs">लिंग (Gender):</label>
+                            <select id="userGender" class="w-full bg-cosmic-bg/80 border border-cosmic-gold/30 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-cosmic-gold transition">
+                                <option value="पुरुष">पुरुष (Male)</option>
+                                <option value="स्त्री">स्त्री (Female)</option>
+                                <option value="इतर">इतर (Other)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Zodiac Selection (राशी) -->
+                    <div>
+                        <label class="block text-gray-300 mb-1 font-marathi text-xs">तुमची जन्म राशी (Zodiac Sign):</label>
+                        <select id="userRashi" required class="w-full bg-cosmic-bg/80 border border-cosmic-gold/40 rounded-xl px-3.5 py-2.5 text-cosmic-gold font-marathi focus:outline-none focus:border-cosmic-gold transition">
+                            <option value="">-- तुमची राशी निवडा --</option>
+                            <option value="मेष">मेष (Aries - ♈)</option>
+                            <option value="वृषभ">वृषभ (Taurus - ♉)</option>
+                            <option value="मिथुन">मिथुन (Gemini - ♊)</option>
+                            <option value="कर्क">कर्क (Cancer - ♋)</option>
+                            <option value="सिंह">सिंह (Leo - ♌)</option>
+                            <option value="कन्या">कन्या (Virgo - ♍)</option>
+                            <option value="तूळ">तूळ (Libra - ♎)</option>
+                            <option value="वृश्चिक">वृश्चिक (Scorpio - ♏)</option>
+                            <option value="धनु">धनु (Sagittarius - ♐)</option>
+                            <option value="मकर">मकर (Capricorn - ♑)</option>
+                            <option value="कुंभ">कुंभ (Aquarius - ♒)</option>
+                            <option value="मीन">मीन (Pisces - ♓)</option>
+                        </select>
+                    </div>
+
+                    <!-- Primary Concern -->
+                    <div>
+                        <label class="block text-gray-300 mb-1 font-marathi text-xs">मुख्य प्रश्न / सल्ला क्षेत्र:</label>
+                        <select id="userConcern" class="w-full bg-cosmic-bg/80 border border-cosmic-gold/30 rounded-xl px-3.5 py-2.5 text-white font-marathi focus:outline-none focus:border-cosmic-gold transition">
+                            <option value="करिअर आणि नोकरी">करिअर, पदोन्नती व नोकरी (Career & Job)</option>
+                            <option value="आर्थिक प्रगती व व्यापार">आर्थिक प्रगती व व्यापार (Wealth & Business)</option>
+                            <option value="विवाह व नातेसंबंध">विवाह व वैवाहिक जीवन (Marriage & Relationships)</option>
+                            <option value="आरोग्य आणि ऊर्जा">आरोग्य व मानसिक शांती (Health & Peace)</option>
+                            <option value="उच्च शिक्षण व स्पर्धा परीक्षा">उच्च शिक्षण व स्पर्धा परीक्षा (Education)</option>
+                            <option value="सर्वसाधारण भविष्यफल">सर्वसाधारण मार्गदर्शन (General Astrology)</option>
+                        </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn" class="w-full py-3.5 mt-4 rounded-xl cosmic-gradient-btn text-white font-bold font-marathi text-base flex items-center justify-center gap-2 cursor-pointer border border-cosmic-gold/30 shadow-xl">
+                        <i class="fa-solid fa-wand-magic-sparkles text-cosmic-gold"></i> भविष्य व रत्न मार्गदर्शक मिळवा
+                    </button>
+                </form>
+            </section>
+
+            <!-- Right Panel: Output & Astrological Insights -->
+            <section class="lg:col-span-7 space-y-6">
+
+                <!-- Placeholder Initial State -->
+                <div id="placeholderState" class="glass-panel rounded-3xl p-12 text-center flex flex-col items-center justify-center min-h-[460px] border border-dashed border-cosmic-gold/30">
+                    <div class="w-20 h-20 rounded-full bg-cosmic-purple/30 border border-cosmic-gold/40 flex items-center justify-center text-cosmic-gold mb-6 animate-pulse-slow">
+                        <i class="fa-solid fa-dharmachakra text-4xl animate-spin-slow"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold gold-gradient-text font-marathi mb-2">तुमचे कॉस्मिक पत्री विश्लेषण तयार करा</h3>
+                    <p class="text-sm text-gray-400 max-w-md font-marathi">
+                        डावीकडील फॉर्ममध्ये तुमची योग्य माहिती भरा. आमचे एआय इंजिन ज्योतिष शास्त्राच्या सिद्धांतांनुसार तुमच्यासाठी अचूक रत्न आणि सविस्तर उपाय शोधून देईल.
+                    </p>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="hidden glass-panel rounded-3xl p-12 text-center flex flex-col items-center justify-center min-h-[460px]">
+                    <div class="relative mb-6">
+                        <div class="w-20 h-20 rounded-full border-4 border-cosmic-gold/20 border-t-cosmic-gold animate-spin"></div>
+                        <i class="fa-solid fa-star absolute inset-0 m-auto text-xl text-cosmic-amber animate-ping"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-cosmic-gold font-marathi mb-2">ग्रह ताऱ्यांची हालचाल मोजली जात आहे...</h3>
+                    <p id="loadingSubtext" class="text-xs text-gray-400 font-sans">Local LLM / Rule Engine कडून विश्लेषणात्मक माहिती संकलित होत आहे.</p>
+                </div>
+
+                <!-- Output Container (Hidden initially) -->
+                <div id="resultState" class="hidden space-y-6 animate-float">
+
+                    <!-- Personal Astrology Banner -->
+                    <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-cosmic-gold/40">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] uppercase font-sans tracking-widest bg-cosmic-purple/60 text-cosmic-gold px-2.5 py-1 rounded-full border border-cosmic-gold/30">व्यक्तिगत वैदिक पत्रिका</span>
+                                <h2 id="outName" class="text-2xl font-bold gold-gradient-text font-marathi mt-1">--</h2>
+                                <p id="outDetails" class="text-xs text-gray-400 font-sans mt-1">--</p>
+                            </div>
+                            <div class="text-right">
+                                <span id="outRashiBadge" class="text-lg font-bold text-cosmic-gold bg-cosmic-bg/90 px-4 py-1.5 rounded-2xl border border-cosmic-gold/50 inline-block shadow-lg font-marathi">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlighted Gemstone Recommendation Card -->
+                    <div class="glass-panel rounded-3xl p-6 relative border-2 border-cosmic-gold shadow-2xl overflow-hidden bg-gradient-to-br from-cosmic-card to-cosmic-purple/30">
+                        <div class="absolute -top-3 -right-3 bg-cosmic-gold text-cosmic-bg text-[10px] font-bold font-sans px-4 py-1.5 rounded-bl-xl uppercase tracking-wider shadow-md">
+                            अति-लाभकारी रत्न
+                        </div>
+
+                        <h3 class="text-xl font-bold text-cosmic-gold font-marathi mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-gem text-cosmic-amber"></i> सुचवलेला मुख्य भाग्यशाली खडा (Suggested Gemstone)
+                        </h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center bg-cosmic-bg/80 border border-cosmic-gold/20 p-5 rounded-2xl backdrop-blur">
+                            <div class="text-center md:border-r border-cosmic-gold/20 pr-3">
+                                <div id="outGemIcon" class="w-16 h-16 mx-auto rounded-full bg-cosmic-purple/40 border border-cosmic-gold/50 flex items-center justify-center text-3xl text-cosmic-amber mb-2 shadow-inner">
+                                    <i class="fa-regular fa-gem"></i>
+                                </div>
+                                <h4 id="outGemName" class="text-xl font-bold text-cosmic-gold font-marathi">--</h4>
+                                <p id="outGemEnglish" class="text-xs text-gray-400 font-sans">--</p>
+                            </div>
+                            <div class="md:col-span-2 space-y-2 text-xs font-sans">
+                                <p class="flex justify-between border-b border-gray-800 pb-1"><strong class="text-cosmic-gold font-marathi text-xs">संबंधित ग्रह:</strong> <span id="outGemPlanet" class="text-gray-200 font-marathi">--</span></p>
+                                <p class="flex justify-between border-b border-gray-800 pb-1"><strong class="text-cosmic-gold font-marathi text-xs">धारण करण्याची धातू:</strong> <span id="outGemMetal" class="text-gray-200 font-marathi">--</span></p>
+                                <p class="flex justify-between border-b border-gray-800 pb-1"><strong class="text-cosmic-gold font-marathi text-xs">अंगठ्याचे बोट व दिवस:</strong> <span id="outGemFingerDay" class="text-gray-200 font-marathi">--</span></p>
+                                <p class="border-b border-gray-800 pb-1"><strong class="text-cosmic-gold font-marathi text-xs">अभिमंत्रित करण्याचा मंत्र:</strong> <br><span id="outGemMantra" class="italic text-cosmic-amber font-marathi">--</span></p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-xs font-marathi text-gray-300 bg-cosmic-purple/20 p-3.5 rounded-xl border border-cosmic-gold/20 leading-relaxed">
+                            <p><strong class="text-cosmic-gold">रत्न परिधान करण्याचे मुख्य फायदे:</strong> <span id="outGemBenefit">--</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Lucky Grid (अंक, रंग, दिवस) -->
+                    <div class="grid grid-cols-3 gap-4 font-marathi">
+                        <div class="glass-panel rounded-2xl p-4 text-center border border-cosmic-gold/30">
+                            <i class="fa-solid fa-hashtag text-cosmic-amber text-lg mb-1"></i>
+                            <span class="block text-[11px] text-gray-400">भाग्यशाली अंक</span>
+                            <span id="outLuckyNumber" class="text-xl font-bold text-cosmic-gold">--</span>
+                        </div>
+                        <div class="glass-panel rounded-2xl p-4 text-center border border-cosmic-gold/30">
+                            <i class="fa-solid fa-palette text-cosmic-amber text-lg mb-1"></i>
+                            <span class="block text-[11px] text-gray-400">भाग्यशाली रंग</span>
+                            <span id="outLuckyColor" class="text-xl font-bold text-cosmic-gold">--</span>
+                        </div>
+                        <div class="glass-panel rounded-2xl p-4 text-center border border-cosmic-gold/30">
+                            <i class="fa-solid fa-calendar-day text-cosmic-amber text-lg mb-1"></i>
+                            <span class="block text-[11px] text-gray-400">शुभ वार</span>
+                            <span id="outLuckyDay" class="text-xl font-bold text-cosmic-gold">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Predictions Text Box -->
+                    <div class="glass-panel rounded-3xl p-6 border border-cosmic-gold/30 space-y-4">
+                        <h3 class="text-lg font-bold text-cosmic-gold font-marathi border-b border-cosmic-gold/20 pb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-star-of-david text-cosmic-amber"></i> सविस्तर भविष्यवाणी व मार्गदर्शक विश्लेषण
+                        </h3>
+                        
+                        <div id="outPredictionText" class="text-sm font-marathi leading-relaxed space-y-3 text-gray-200">
+                            <!-- Dynamically generated AI content -->
+                        </div>
+
+                        <!-- Upay / Remedies -->
+                        <div class="mt-4 pt-4 border-t border-cosmic-gold/20">
+                            <h4 class="font-bold text-cosmic-gold font-marathi text-sm mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-hands-praying text-cosmic-amber"></i> विशेष ज्योतिष उपाय (Remedies):
+                            </h4>
+                            <ul id="outRemediesList" class="list-disc list-inside text-xs font-marathi text-gray-300 space-y-1.5">
+                                <!-- Remedies list -->
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- Navratna Interactive Catalogue Section -->
+        <section id="gemCatalogueSection" class="max-w-7xl mx-auto px-4 py-12 w-full">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-sans tracking-widest text-cosmic-amber uppercase">Vedic Gemstone Treasury</span>
+                <h2 class="text-3xl font-bold gold-gradient-text font-marathi mt-1">नवग्रह आणि ९ प्रमुख रत्ने (Navratna Catalogue)</h2>
+                <p class="text-xs text-gray-400 font-marathi mt-2">वैदिक ज्योतिषानुसार नवग्रहांचे संतुलन राखण्यासाठी वापरल्या जाणाऱ्या सर्व प्रमुख रत्नांची सविस्तर माहिती.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gem Cards dynamically rendered -->
+                <div id="gemCardsGrid" class="contents">
+                    <!-- Javascript populates 9 gemstones cards here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Local LLM Instructions Accordion / Section -->
+        <section class="max-w-7xl mx-auto px-4 py-6 mb-8 w-full">
+            <div class="glass-panel rounded-2xl p-6 border border-cosmic-gold/20 text-xs font-sans">
+                <div class="flex items-center justify-between cursor-pointer" onclick="toggleSetupGuide()">
+                    <h3 class="font-bold text-cosmic-gold text-sm font-marathi flex items-center gap-2">
+                        <i class="fa-solid fa-terminal text-cosmic-amber"></i> कॉम्प्युटरवर Local LLM (Ollama) कसे सेट करावे? (मराठीत सोप्या टिप्स)
+                    </h3>
+                    <i id="guideChevron" class="fa-solid fa-chevron-down text-gray-400"></i>
+                </div>
+                
+                <div id="setupGuideContent" class="hidden mt-4 pt-4 border-t border-gray-800 space-y-3 text-gray-300">
+                    <p>तुमच्या वैयक्तिक PC वर Ollama द्वारे पूर्णपणे मोफत आणि प्रायव्हेट एआय मॉडेल चालवण्यासाठी खालील स्टेप्स वापरा:</p>
+                    <ol class="list-decimal list-inside space-y-2 font-mono text-[11px] text-gray-300">
+                        <li>पहिले <a href="https://ollama.com" target="_blank" class="text-cosmic-amber underline">ollama.com</a> वरून Ollama सॉफ्टवेअर डाउनलोड करा.</li>
+                        <li>कमांड प्रॉम्प्ट (CMD / Terminal) उघडा आणि मॉडेल डाउनलोड करा:
+                            <code class="block bg-black/60 p-2 my-1 rounded border border-gray-800 text-green-400">ollama run llama3</code>
+                        </li>
+                        <li>ब्राउझरमधून स्थानिक कनेक्ट (CORS Header allow) करण्यासाठी ही कमांड चालवून Ollama सर्व्हर चालू करा:
+                            <code class="block bg-black/60 p-2 my-1 rounded border border-gray-800 text-yellow-300">OLLAMA_ORIGINS="*" ollama serve</code>
+                        </li>
+                        <li>वेबसाईटवरील वरील <strong>"Local LLM"</strong> बटणावर क्लिक करा आणि 'सुरू करणे' निवडा.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="glass-panel border-t border-cosmic-gold/20 text-center py-6 text-xs text-gray-500 font-marathi">
+            <p>© 2026 ज्योतिष ज्ञान व रत्न मार्गदर्शक | वैदिक ज्योतिष आणि Local LLM तंत्रज्ञानाचा मेळ</p>
+        </footer>
+
+    </div>
+
+    <!-- Gemstone Detail Modal -->
+    <div id="gemModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="glass-panel border border-cosmic-gold/50 rounded-3xl max-w-xl w-full p-6 shadow-2xl relative space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeGemModal()" class="absolute top-4 right-4 text-gray-400 hover:text-cosmic-gold text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-4 border-b border-cosmic-gold/20 pb-4">
+                <div id="modalGemIcon" class="w-14 h-14 rounded-2xl bg-cosmic-purple/50 border border-cosmic-gold/40 flex items-center justify-center text-3xl text-cosmic-amber"></div>
+                <div>
+                    <h3 id="modalGemTitle" class="text-2xl font-bold font-marathi gold-gradient-text">--</h3>
+                    <p id="modalGemSub" class="text-xs text-gray-400 font-sans">--</p>
+                </div>
+            </div>
+
+            <div class="space-y-3 font-marathi text-xs text-gray-300 leading-relaxed">
+                <div class="grid grid-cols-2 gap-3 bg-cosmic-bg/80 p-3 rounded-xl border border-cosmic-gold/20">
+                    <p><strong class="text-cosmic-gold">संबंधित ग्रह:</strong> <span id="modalGemPlanet">--</span></p>
+                    <p><strong class="text-cosmic-gold">योग्य राशी:</strong> <span id="modalGemRashi">--</span></p>
+                    <p><strong class="text-cosmic-gold">धारण धातू:</strong> <span id="modalGemMetal">--</span></p>
+                    <p><strong class="text-cosmic-gold">शुभ दिवस:</strong> <span id="modalGemDay">--</span></p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-cosmic-gold mb-1">मुख्य फायदे (Benefits):</h4>
+                    <p id="modalGemBenefits" class="bg-cosmic-purple/20 p-3 rounded-xl border border-cosmic-gold/10">--</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-cosmic-gold mb-1">धारणाची काळजी / नियम (Precautions):</h4>
+                    <p id="modalGemCaution" class="bg-red-950/30 p-3 rounded-xl border border-red-500/20 text-gray-300">--</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Local LLM Settings Modal -->
+    <div id="llmModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="glass-panel border border-cosmic-gold/50 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative space-y-4">
+            <button onclick="toggleLLMModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-xl font-bold gold-gradient-text font-marathi flex items-center gap-2">
+                <i class="fa-solid fa-gears"></i> Local LLM (Ollama) API कॉन्फिगरेशन
+            </h3>
+            <p class="text-xs text-gray-400 font-sans">
+                तुमच्या स्थानिक कॉम्प्युटरवर चालणाऱ्या Ollama LLM शी कनेक्ट करा किंवा built-in स्मार्ट इंजिन वापरा.
+            </p>
+
+            <div class="space-y-4 font-sans text-xs">
+                <div>
+                    <label class="block text-cosmic-gold mb-1">Local LLM Toggle:</label>
+                    <select id="llmToggle" class="w-full bg-cosmic-bg border border-cosmic-gold/40 rounded-xl p-2.5 text-white">
+                        <option value="off">बंद ठेवणे (Use Built-in Marathi Rule Engine)</option>
+                        <option value="on">सुरू करणे (Connect to Ollama Endpoint)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-cosmic-gold mb-1">Ollama API URL Endpoint:</label>
+                    <input type="text" id="llmUrl" value="http://localhost:11434/api/generate" class="w-full bg-cosmic-bg border border-cosmic-gold/40 rounded-xl p-2.5 text-white">
+                </div>
+
+                <div>
+                    <label class="block text-cosmic-gold mb-1">Model Name:</label>
+                    <input type="text" id="llmModel" value="llama3" placeholder="e.g. llama3, mistral, gemma" class="w-full bg-cosmic-bg border border-cosmic-gold/40 rounded-xl p-2.5 text-white">
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-3 border-t border-gray-800">
+                <button onclick="checkOllamaConnection()" class="px-3.5 py-2 glass-panel text-cosmic-amber hover:text-white rounded-xl text-xs">
+                    <i class="fa-solid fa-plug"></i> कनेक्शन तपासा
+                </button>
+                <button onclick="saveLLMConfig()" class="px-5 py-2 cosmic-gradient-btn text-white font-bold rounded-xl text-xs">
+                    सेव्ह करा (Save)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Data and Core Engine -->
+    <script>
+        // Starfield Particles Canvas Animation
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 4000);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5,
+                    color: Math.random() > 0.3 ? '#ffd700' : '#ffffff',
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.01 + 0.005
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = star.color;
+                ctx.globalAlpha = Math.abs(star.alpha);
+                ctx.fill();
+            });
+            requestAnimationFrame(drawStars);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        drawStars();
+
+        // Comprehensive 9 Navratna Knowledge Base
+        const navratnaData = [
+            {
+                id: "ruby",
+                name: "माणिक (Ruby)",
+                eng: "Ruby",
+                planet: "सूर्य (Sun)",
+                rashi: "सिंह (Leo)",
+                metal: "सोने किंवा तांबे",
+                day: "रविवार",
+                finger: "अनामिका (Ring Finger)",
+                mantra: "ॐ घृणिः सूर्याय नमः",
+                icon: "fa-gem",
+                iconColor: "text-red-500",
+                benefits: "आत्मविश्वास, नेतृत्वगुण, पद-प्रतिष्ठा आणि सरकारी कामांत यश मिळवण्यासाठी माणिक उत्तम मानले जाते.",
+                caution: "शनि, शुक्र किंवा राहूचे इतर खडे यासोबत धारण करू नयेत."
+            },
+            {
+                id: "pearl",
+                name: "मोती (Pearl)",
+                eng: "Pearl",
+                planet: "चंद्र (Moon)",
+                rashi: "कर्क (Cancer)",
+                metal: "चांदी (Silver)",
+                finger: "करंगळी (Little Finger)",
+                day: "सोमवार",
+                mantra: "ॐ सों सोमाय नमः",
+                icon: "fa-circle",
+                iconColor: "text-slate-200",
+                benefits: "मानसिक ताणतणाव दूर करून मन शांत ठेवणे आणि निर्णयक्षमता वाढवण्यासाठी अत्यंत गुणकारी.",
+                caution: "अशुद्ध किंवा तडे गेलेला मोती वापरू नये."
+            },
+            {
+                id: "coral",
+                name: "पोवळे (Red Coral)",
+                eng: "Red Coral",
+                planet: "मंगळ (Mars)",
+                rashi: "मेष, वृश्चिक",
+                metal: "तांबे किंवा सोने",
+                finger: "अनामिका (Ring Finger)",
+                day: "मंगळवार",
+                mantra: "ॐ अं अंगारकाय नमः",
+                icon: "fa-cubes",
+                iconColor: "text-orange-500",
+                benefits: "रक्ताभिसरण, शारीरिक ऊर्जा, धाडस आणि मांगलिक दोष निवारणासाठी उपयुक्त.",
+                caution: "खूप जास्त रागीट स्वभाव असलेल्यांनी डॉक्टरी/ज्योतिष सल्ल्याने वापरावा."
+            },
+            {
+                id: "emerald",
+                name: "पाचू (Emerald)",
+                eng: "Emerald",
+                planet: "बुध (Mercury)",
+                rashi: "मिथुन, कन्या",
+                metal: "सोने किंवा कांस्य",
+                finger: "करंगळी (Little Finger)",
+                day: "बुधवार",
+                mantra: "ॐ बुं बुधाय नमः",
+                icon: "fa-diamond",
+                iconColor: "text-emerald-400",
+                benefits: "बुद्धिमत्ता, व्यापार, संवादकौशल्य, गणित आणि अभ्यासात उच्च यशासाठी अत्यंत लाभकारी.",
+                caution: "नितळ हिरवा पारदर्शक पाचू धारण करावा."
+            },
+            {
+                id: "yellow_sapphire",
+                name: "पुष्कराज (Yellow Sapphire)",
+                eng: "Yellow Sapphire",
+                planet: "गुरु (Jupiter)",
+                rashi: "धनु, मीन",
+                metal: "सोने (Gold)",
+                finger: "तर्जनी (Index Finger)",
+                day: "गुरुवार",
+                mantra: "ॐ बृं बृहस्पतये नमः",
+                icon: "fa-sun",
+                iconColor: "text-yellow-400",
+                benefits: "ज्ञानवृद्धी, आध्यात्मिक उन्नती, विवाहयोग व संतती सुखासाठी सर्वोच्च रत्न.",
+                caution: "गुरुवारी सकाळी स्नान करून अभिमंत्रित करून घालावे."
+            },
+            {
+                id: "diamond",
+                name: "हिरा / ओपल (Diamond/Opal)",
+                eng: "Diamond or Opal",
+                planet: "शुक्र (Venus)",
+                rashi: "वृषभ, तूळ",
+                metal: "चांदी किंवा प्लॅटिनम",
+                finger: "मध्यमा किंवा अनामिका",
+                day: "शुक्रवार",
+                mantra: "ॐ शुं शुक्राय नमः",
+                icon: "fa-gem",
+                iconColor: "text-cyan-300",
+                benefits: "सौंदर्य, कला, ऐश्वर्य, आकर्षण आणि वैवाहिक आयुष्यातील गोडव्यासाठी उपयुक्त.",
+                caution: "तडे गेलेला हिरा किंवा ओपल अशुभ मानला जातो."
+            },
+            {
+                id: "blue_sapphire",
+                name: "नीलम (Blue Sapphire)",
+                eng: "Blue Sapphire",
+                planet: "शनि (Saturn)",
+                rashi: "मकर, कुंभ",
+                metal: "पंचधातू किंवा पोलाद",
+                finger: "मध्यमा (Middle Finger)",
+                day: "शनिवार",
+                mantra: "ॐ शं शनैश्चराय नमः",
+                icon: "fa-certificate",
+                iconColor: "text-blue-500",
+                benefits: "अतिशय वेगाने फळ देणारे रत्न. करिअरमध्ये प्रचंड यश, शिस्त आणि धनलाभासाठी अत्यंत प्रभावी.",
+                caution: "नीलम धारण करण्यापूर्वी २ ते ३ दिवस चाचणी (Trial) करणे आवश्यक आहे."
+            },
+            {
+                id: "hessonite",
+                name: "गोमेद (Hessonite)",
+                eng: "Hessonite / Gomed",
+                planet: "राहू (Rahu)",
+                rashi: "कुंभ / राहू प्रभाव",
+                metal: "पंचधातू किंवा चांदी",
+                finger: "मध्यमा (Middle Finger)",
+                day: "शनिवार",
+                mantra: "ॐ रां राहवे नमः",
+                icon: "fa-shield-cat",
+                iconColor: "text-amber-700",
+                benefits: "अचानक होणारे नुकसान रोखणे, राजकारणात यश आणि राहू दोषाची शांतता करण्यासाठी उपयुक्त.",
+                caution: "फक्त राहू महादशा काळातच योग्य सल्ल्याने वापरावा."
+            },
+            {
+                id: "cat_eye",
+                name: "लसण्या (Cat's Eye)",
+                eng: "Cat's Eye / Lehsuniya",
+                planet: "केतू (Ketu)",
+                rashi: "केतू प्रभाव",
+                metal: "पंचधातू किंवा चांदी",
+                finger: "मध्यमा / अनामिका",
+                day: "गुरुवार/शनिवार",
+                mantra: "ॐ कें केतवे नमः",
+                icon: "fa-eye",
+                iconColor: "text-green-300",
+                benefits: "नजरदोष, गुप्त शत्रू आणि अनपेक्षित संकटांपासून संरक्षण करण्यासाठी अत्यंत रक्षक रत्न.",
+                caution: "रत्नाच्या मधोमध मांजराच्या डोळ्यासारखी चमकणारी रेष स्पष्ट असावी."
+            }
+        ];
+
+        // Detailed Rashi & Astrology System Mapping
+        const astrologyRashiMap = {
+            "मेष": {
+                gem: navratnaData[2], // Red Coral
+                number: "९", color: "लाल / सिंदुरी", day: "मंगळवार",
+                prediction: "मेष राशीच्या लोकांसाठी आगामी काळ नव्या संधींचा राहील. मंगळ ग्रहाच्या प्रभावामुळे धैर्यात वाढ होईल. करिअरमध्ये धाडसी निर्णय फायदेशीर ठरतील.",
+                remedies: ["दर मंगळवारी हनुमान चालीसा म्हणा.", "गरजूंना लाल मसूर दान करा.", "सकाळी सूर्याला नमस्कार करा."]
+            },
+            "वृषभ": {
+                gem: navratnaData[5], // Opal / Diamond
+                number: "६", color: "पांढरा / गुलाबी", day: "शुक्रवार",
+                prediction: "शुक्राच्या प्रभावामुळे भौतिक सुखसोयी आणि संपत्तीत वृद्धी होईल. कला व निर्मिती क्षेत्रातील लोकांना विशेष यश लाभेल.",
+                remedies: ["शुक्रवारी महालक्ष्मीची उपासना करा.", "पांढऱ्या वस्तू (उदा. साखर, दूध) दान करा.", "सुगंधी द्रव्यांचा वापर करा."]
+            },
+            "मिथुन": {
+                gem: navratnaData[3], // Emerald
+                number: "५", color: "हिरवा", day: "बुधवार",
+                prediction: "बुध ग्रहाची साथ मिळाल्याने बुद्धिमत्ता व संवादकौशल्यात प्रगती होईल. व्यापार आणि अभ्यासातील अडथळे दूर होतील.",
+                remedies: ["बुधवारी गणपतीला दुर्वा अर्पण करा.", "गाईला हिरवा चारा खायला द्या.", "हिरवे वस्त्र परिधान करा."]
+            },
+            "कर्क": {
+                gem: navratnaData[1], // Pearl
+                number: "२", color: "पांढरा / रुपेरी", day: "सोमवार",
+                prediction: "चंद्राच्या प्रभावामुळे भावनाप्रधानता वाढेल. मानसिक एकाग्रता राखल्यास कामात मोठे यश संपादन करता येईल.",
+                remedies: ["सोमवारी शिवाला दुधाचा अभिषेक करा.", "आईचा आशीर्वाद रोज घ्या.", "शिवपंचाक्षर मंत्र जपा."]
+            },
+            "सिंह": {
+                gem: navratnaData[0], // Ruby
+                number: "१", color: "केशरी / सोनेरी", day: "रविवार",
+                prediction: "सूर्य ग्रहाच्या पाठिंब्यामुळे समाजात मानसन्मान व प्रतिष्ठा वाढेल. सरकारी किंवा प्रशासकीय कामात मोठी यशोगाथा घडेल.",
+                remedies: ["रोज सकाळी तांब्याच्या पात्रातून सूर्याला अर्घ्य द्या.", "गायत्री मंत्राचा जप करा.", "पित्याचा आदर करा."]
+            },
+            "कन्या": {
+                gem: navratnaData[3], // Emerald
+                number: "५", color: "हिरवा / निळा", day: "बुधवार",
+                prediction: "कामातील अचूकता व नियोजन यामुळे नोकरी-व्यवसाय उंचावेल. नवीन गुंतवणूक करण्यासाठी अत्यंत शुभ काळ आहे.",
+                remedies: ["गणपती अथर्वशीर्ष पाठ करा.", "पक्ष्यांना अन्नधान्य टाका.", "अभ्यासावर भर द्या."]
+            },
+            "तूळ": {
+                gem: navratnaData[5], // Opal / Diamond
+                number: "६", color: "पांढरा / आकाशी", day: "शुक्रवार",
+                prediction: "जीवनात आणि नातेसंबंधांत उत्तम समतोल निर्माण होईल. व्यावसायिक भागीदारीतून धनलाभाची शक्यता निर्माण होईल.",
+                remedies: ["लक्ष्मी चालीसा म्हणा.", "स्त्री वर्गाचा आदर करा.", "पांढरे वस्त्र दान करा."]
+            },
+            "वृश्चिक": {
+                gem: navratnaData[2], // Red Coral
+                number: "९", color: "घट्ट लाल / मरुण", day: "मंगळवार",
+                prediction: "गूढ ज्ञान आणि संशोधनात्मक कामात विशेष गती मिळेल. शत्रूंवर मात कराल व अचानक धनलाभ संभवतो.",
+                remedies: ["हनुमान मंदिरात शेंदूर अर्पण करा.", "सुंदरकांड पाठ करा.", "क्रोध अनावर होऊ देऊ नका."]
+            },
+            "धनु": {
+                gem: navratnaData[4], // Yellow Sapphire
+                number: "३", color: "पिवळा / सोनेरी", day: "गुरुवार",
+                prediction: "गुरु ग्रहाची कृपा मिळाल्याने ज्ञान, अध्यात्म आणि उच्च शिक्षणात उत्तुंग यश मिळेल. नशीब पूर्ण साथ देईल.",
+                remedies: ["गुरुवारी केळीच्या झाडाची पूजा करा.", "विष्णु सहस्रनाम जपा.", "शिक्षकांचा मान ठेवा."]
+            },
+            "मकर": {
+                gem: navratnaData[6], // Blue Sapphire
+                number: "८", color: "काळा / गडद निळा", day: "शनिवार",
+                prediction: "शनिदेवाच्या प्रभावामुळे कष्टाचे गोड फळ मिळेल. करिअरमधील दीर्घकालीन योजना यशस्वी होतील.",
+                remedies: ["शनिवारी शनी मंदिरात तेलाचा दिवा लावा.", "पिंपळाला पाणी घाला.", "गरिबांना अन्नदान करा."]
+            },
+            "कुंभ": {
+                gem: navratnaData[6], // Blue Sapphire / Amethyst
+                number: "८", color: "जांभळा / निळा", day: "शनिवार",
+                prediction: "सामाजिक कार्यात प्रतिष्ठा वाढेल. नवीन विचार आणि तंत्रज्ञानाच्या मदतीने मोठी प्रगती साधता येईल.",
+                remedies: ["शनि चालीसा म्हणा.", "कौशल्य विकासावर भर द्या.", "अनाथालयात मदत करा."]
+            },
+            "मीन": {
+                gem: navratnaData[4], // Yellow Sapphire
+                number: "३", color: "हळदी पिवळा", day: "गुरुवार",
+                prediction: "मानसिक शांती आणि धार्मिक कामात मन रमेल. दूरवरच्या प्रवासातून आणि परदेशी संबंधातून फायदा होईल.",
+                remedies: ["गुरुवारी हरभऱ्याची डाळ दान करा.", "सत्याचे आचरण करा.", "गाईला पोळी खायला द्या."]
+            }
+        };
+
+        // Render Navratna Grid Cards
+        function renderGemCatalogue() {
+            const grid = document.getElementById('gemCardsGrid');
+            grid.innerHTML = '';
+            navratnaData.forEach(gem => {
+                const card = document.createElement('div');
+                card.className = "glass-panel glass-panel-hover rounded-2xl p-5 transition cursor-pointer flex flex-col justify-between";
+                card.onclick = () => openGemModal(gem.id);
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="w-12 h-12 rounded-xl bg-cosmic-purple/40 border border-cosmic-gold/30 flex items-center justify-center text-2xl ${gem.iconColor}">
+                                <i class="fa-solid ${gem.icon}"></i>
+                            </div>
+                            <span class="text-[10px] bg-cosmic-bg/80 text-cosmic-gold border border-cosmic-gold/30 px-2 py-1 rounded-md font-sans">${gem.planet}</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-cosmic-gold font-marathi">${gem.name}</h3>
+                        <p class="text-xs text-gray-400 font-sans mb-2">${gem.eng}</p>
+                        <p class="text-xs text-gray-300 font-marathi line-clamp-2">${gem.benefits}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-800 flex justify-between items-center text-xs text-cosmic-amber font-marathi">
+                        <span>सविस्तर माहिती पहा</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        renderGemCatalogue();
+
+        // LLM & Form State Handling
+        let llmConfig = {
+            enabled: false,
+            url: "http://localhost:11434/api/generate",
+            model: "llama3"
+        };
+
+        function toggleLLMModal() {
+            document.getElementById('llmModal').classList.toggle('hidden');
+        }
+
+        function toggleSetupGuide() {
+            const guide = document.getElementById('setupGuideContent');
+            const icon = document.getElementById('guideChevron');
+            guide.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        function saveLLMConfig() {
+            const toggleVal = document.getElementById('llmToggle').value;
+            llmConfig.enabled = (toggleVal === 'on');
+            llmConfig.url = document.getElementById('llmUrl').value;
+            llmConfig.model = document.getElementById('llmModel').value;
+
+            updateLLMUIStatus();
+            toggleLLMModal();
+        }
+
+        function updateLLMUIStatus() {
+            const statusText = document.getElementById('llm-status-text');
+            const dot = document.getElementById('llm-status-dot');
+
+            if (llmConfig.enabled) {
+                statusText.innerText = `Local LLM: सुरू (${llmConfig.model})`;
+                dot.className = "relative inline-flex rounded-full h-2 w-2 bg-green-500";
+            } else {
+                statusText.innerText = `Local LLM: बंद (Rule Engine Active)`;
+                dot.className = "relative inline-flex rounded-full h-2 w-2 bg-red-500";
+            }
+        }
+
+        async function checkOllamaConnection() {
+            try {
+                const res = await fetch(llmConfig.url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: llmConfig.model, prompt: "hi", stream: false })
+                });
+                if (res.ok) {
+                    alert("Ollama कनेक्शन यशस्वी झाले आहे!");
+                } else {
+                    alert("Ollama सर्व्हर प्रतिसादात्मक नाही. URL व मॉडल तपासणी करा.");
+                }
+            } catch (err) {
+                alert("कनेक्शन अयशस्वी! कृपया खात्री करा की 'ollama serve' सुरु आहे आणि CORS सक्षम आहे.");
+            }
+        }
+
+        // Form Submit Handler
+        async function handleFormSubmission(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value;
+            const dob = document.getElementById('userDOB').value;
+            const tob = document.getElementById('userTOB').value;
+            const pob = document.getElementById('userPOB').value;
+            const rashi = document.getElementById('userRashi').value;
+            const concern = document.getElementById('userConcern').value;
+
+            document.getElementById('placeholderState').classList.add('hidden');
+            document.getElementById('resultState').classList.add('hidden');
+            document.getElementById('loadingState').classList.remove('hidden');
+
+            const astroData = astrologyRashiMap[rashi] || astrologyRashiMap["मेष"];
+
+            if (llmConfig.enabled) {
+                try {
+                    const prompt = `तुम्ही एक अत्यंत तज्ज्ञ मराठी वैदिक ज्योतिषी आहात. खालील व्यक्तीच्या माहितीनुसार शुद्ध मराठीत भविष्यवाणी व रत्न सल्ला द्या:
+नाव: ${name}
+जन्म तारीख: ${dob}, वेळ: ${tob}, ठिकाण: ${pob}
+राशी: ${rashi}
+मुख्य प्रश्न/विषय: ${concern}
+
+उत्तर देताना खालील ३ मुद्द्यांवर मराठीत विश्लेषण करा:
+१. ${rashi} राशीनुसार ग्रह स्थिती आणि ${concern} विषयी भविष्यवाणी.
+२. या राशीसाठी सुचवलेला मुख्य रत्न, धारण धातू आणि फायदे.
+३. ३ सोपे वैदिक उपाय.`;
+
+                    const response = await fetch(llmConfig.url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: llmConfig.model,
+                            prompt: prompt,
+                            stream: false
+                        })
+                    });
+
+                    if (response.ok) {
+                        const jsonRes = await response.json();
+                        renderOutput(name, dob, tob, pob, rashi, concern, astroData, jsonRes.response);
+                        return;
+                    }
+                } catch (err) {
+                    console.warn("Local LLM API unavailable, falling back to smart built-in rule engine.", err);
+                }
+            }
+
+            // Default Built-in Rule Engine Prediction
+            setTimeout(() => {
+                const textHTML = `
+                    <p>सस्नेह नमस्कार <strong>${name}</strong> जी, तुमच्या कुंडलीत <strong>${rashi}</strong> राशीचे स्थान अत्यंत महत्त्वपूर्ण आहे.</p>
+                    <p><strong>${concern} संदर्भात कॉस्मिक विश्लेषण:</strong> सध्याच्या ग्रहांच्या स्थितीनुसार तुम्हाला थोडे धैर्य बाळगणे आवश्यक आहे. ${astroData.prediction}</p>
+                    <p>तुमच्या राशीचे स्वामी ग्रह आणि त्यांच्या शक्तीत वाढ करण्यासाठी योग्य रत्न परिधान करणे आणि खालील उपाय करणे अत्यंत फायदेशीर ठरेल.</p>
+                `;
+                renderOutput(name, dob, tob, pob, rashi, concern, astroData, textHTML);
+            }, 900);
+        }
+
+        function renderOutput(name, dob, tob, pob, rashi, concern, astroData, predictionHTML) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('resultState').classList.remove('hidden');
+
+            // Set Personal Info
+            document.getElementById('outName').innerText = name;
+            document.getElementById('outDetails').innerText = `जन्म: ${dob} | वेळ: ${tob} | ठिकाण: ${pob}`;
+            document.getElementById('outRashiBadge').innerText = `${rashi} राशी`;
+
+            // Gemstone Section
+            const gem = astroData.gem;
+            document.getElementById('outGemName').innerText = gem.name;
+            document.getElementById('outGemEnglish').innerText = gem.eng;
+            document.getElementById('outGemPlanet').innerText = gem.planet;
+            document.getElementById('outGemMetal').innerText = gem.metal;
+            document.getElementById('outGemFingerDay').innerText = `${gem.finger} (${gem.day})`;
+            document.getElementById('outGemMantra').innerText = gem.mantra;
+            document.getElementById('outGemBenefit').innerText = gem.benefits;
+
+            // Set Icon
+            const iconContainer = document.getElementById('outGemIcon');
+            iconContainer.className = `w-16 h-16 mx-auto rounded-full bg-cosmic-purple/40 border border-cosmic-gold/50 flex items-center justify-center text-3xl ${gem.iconColor} mb-2 shadow-inner`;
+            iconContainer.innerHTML = `<i class="fa-solid ${gem.icon}"></i>`;
+
+            // Lucky Specs
+            document.getElementById('outLuckyNumber').innerText = astroData.number;
+            document.getElementById('outLuckyColor').innerText = astroData.color;
+            document.getElementById('outLuckyDay').innerText = astroData.day;
+
+            // Prediction Text
+            document.getElementById('outPredictionText').innerHTML = predictionHTML;
+
+            // Remedies
+            const remList = document.getElementById('outRemediesList');
+            remList.innerHTML = '';
+            astroData.remedies.forEach(rem => {
+                const li = document.createElement('li');
+                li.innerText = rem;
+                remList.appendChild(li);
+            });
+
+            // Smooth Scroll to Result on Mobile
+            document.getElementById('resultState').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Gem Modal Actions
+        function openGemModal(id) {
+            const gem = navratnaData.find(g => g.id === id);
+            if (!gem) return;
+
+            document.getElementById('modalGemTitle').innerText = gem.name;
+            document.getElementById('modalGemSub').innerText = `${gem.eng} | ${gem.planet}`;
+            document.getElementById('modalGemPlanet').innerText = gem.planet;
+            document.getElementById('modalGemRashi').innerText = gem.rashi;
+            document.getElementById('modalGemMetal').innerText = gem.metal;
+            document.getElementById('modalGemDay').innerText = `${gem.day} (${gem.finger})`;
+            document.getElementById('modalGemBenefits').innerText = gem.benefits;
+            document.getElementById('modalGemCaution').innerText = gem.caution;
+
+            const iconDiv = document.getElementById('modalGemIcon');
+            iconDiv.className = `w-14 h-14 rounded-2xl bg-cosmic-purple/50 border border-cosmic-gold/40 flex items-center justify-center text-3xl ${gem.iconColor}`;
+            iconDiv.innerHTML = `<i class="fa-solid ${gem.icon}"></i>`;
+
+            document.getElementById('gemModal').classList.remove('hidden');
+        }
+
+        function closeGemModal() {
+            document.getElementById('gemModal').classList.add('hidden');
+        }
+
+        function scrollToCatalogue() {
+            document.getElementById('gemCatalogueSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
